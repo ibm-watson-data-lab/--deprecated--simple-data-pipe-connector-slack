@@ -5,12 +5,17 @@
 
 # Simple Data Pipe connector for slack.com
 
-This [Simple Data Pipe](https://developer.ibm.com/clouddataservices/simple-data-pipe/) connector has been customized for [slack.com](http://www.slack.com) access. Use this connector to fetch all messages from one or more slack channels.
+This connector uses [the Slack REST API](https://api.slack.com/) to fetch all messages from one or more channels and the [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) to store it in Cloudant. No data enrichment is performed.
+
+Need to load data from other sources? Check out the [connector repository](https://developer.ibm.com/clouddataservices/simple-data-pipe-connectors/).
 
 ### Pre-requisites
 
 ##### General 
- A valid slack user id is required to use this connector. 
+Verify the following:
+ * You have a valid user id for the Slack team you want the Simple Data Pipe to access.
+ * The Slack team is configured to allow application access.
+ * You are registered as a [Slack Developer](https://api.slack.com/register) to configure OAuth access for the Simple Data Pipe.
 
 ##### Deploy the Simple Data Pipe
 
