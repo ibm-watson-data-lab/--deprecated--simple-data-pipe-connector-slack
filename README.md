@@ -3,13 +3,14 @@
 ***
 
 
-# Simple Data Pipe connector boilerplate for slack.com
+# Simple Data Pipe connector for slack.com
 
-This [Simple Data Pipe](https://developer.ibm.com/clouddataservices/simple-data-pipe/) boilerplate connector has been customized for [slack.com](http://www.slack.com) OAuth access. You can build your own special purpose connector by implementing the `getSlackDataSetList` and `fetchRecords` functions in `lib/index.js` to fetch the desired data from specific slack domains and optionally enrich it.
+This [Simple Data Pipe](https://developer.ibm.com/clouddataservices/simple-data-pipe/) connector has been customized for [slack.com](http://www.slack.com) access. Use this connector to fetch all messages from one or more slack channels.
+
 ### Pre-requisites
 
 ##### General 
- A valid slack user id is required to use this connector.
+ A valid slack user id is required to use this connector. 
 
 ##### Deploy the Simple Data Pipe
 
@@ -19,13 +20,13 @@ This [Simple Data Pipe](https://developer.ibm.com/clouddataservices/simple-data-
 
 This connector does not require any additional Bluemix service.
 
-##### Install the Simple Data Pipe boilerplate connector for Slack
+##### Install the Simple Data Pipe connector for Slack
 
   When you [follow these steps to install this connector](https://github.com/ibm-cds-labs/simple-data-pipe/wiki/Installing-a-Simple-Data-Pipe-Connector), add the following line to the dependencies list in the `package.json` file: 
 
 > BETA ONLY
 ```
-"simple-data-pipe-connector-oauth-slack": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-oauth-slack.git#pp_validation"
+"simple-data-pipe-connector-slack": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git#pp_validation"
 ```
 
 ##### Enable OAuth support and collect connectivity information
@@ -34,7 +35,7 @@ This connector does not require any additional Bluemix service.
  
   * TODO? Yup!
 
-### Using the Simple Data Pipe connector boilerplate for slack.com
+### Using the Simple Data Pipe connector for slack.com
 
 To configure and run a pipe
 
@@ -42,7 +43,7 @@ To configure and run a pipe
 2. Select __Create A New Pipe__.
 3. Select __Slack OAuth Data Source__ for the __Type__ when creating a new pipe.  
 4. In the _Connect_ page, enter the _application id_ and _secret_ from the Slack application settings page.
-5. When prompted, select the appropriate Slack team and authorize the Simple Data Pipe application to access it.
+5. When prompted, select a Slack team you belong to and authorize the Simple Data Pipe application to access it in read-only mode. 
 6. Select a channel (or All channels) from which to load messages.
 7. Schedule or run the data pipe now.
 
