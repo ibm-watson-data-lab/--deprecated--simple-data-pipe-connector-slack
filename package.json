@@ -1,5 +1,5 @@
 {
-  "name": "simple-data-pipe-connector-connector-slack",
+  "name": "simple-data-pipe-connector-slack",
   "version": "0.0.1",
   "description": "Simple Data Pipe connector for Slack.",
   "main": "./lib",
