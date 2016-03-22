@@ -1,56 +1,80 @@
-<h1>
-  Connect to {{selectedConnector.label}}
-</h1>
+<section class="layout_section theme_light">
 
-<div ng-show="selectedPipe.tables && selectedPipe.tables.length > 0" class="alert alert-success">
-  <p>
-    <span class="glyphicon glyphicon-ok"></span> <strong>You're connected!</strong> If you want to change the data sets contents <a data-toggle="collapse" data-target="#connect-form">click here</a>.
+  <h1 class="type_heading" id="toc_0">
+    <mark class="type_mark">Connect to {{selectedConnector.label}} via OAuth</mark>
+  </h1>
+  <p class="type_copy">
+    <strong>Note</strong>: If this is your first time setting up OAuth in {{selectedConnector.label}}, check out our tutorial for
+    <a href="http://developer.ibm.com/clouddataservices/simple-data-pipe/" target="_blank" class="type_link">more detailed instructions</a>.
   </p>
-</div>
+</section>
+
+<section class="layout_section">
+
+  <p class="alert-container warning" ng-show="selectedPipe.tables && selectedPipe.tables.length > 0">
+    <span class="glyphicon glyphicon-ok"></span> <strong>You're connected!</strong> If your OAuth token has expired, <a class="type_link" ng-click="toggle('connect-form')">refresh it</a>.
+  </p>
 
 <div id="connect-form" ng-class="{collapse: selectedPipe.tables && selectedPipe.tables.length > 0}">
-  <section>
-    <div class="well well-lg">
-      This connector exports data from Slack into a Cloudant Database.
-      To use this connector, you need to generate an API Key for the slack instance you want to access.
-      You can generate an API key at <a url="https://api.slack.com/web">Slack api web site</a>
-    </div>
+  
+  <p class="type_copy">
+    Before copying data from {{selectedConnector.label}} to IBM Cloudant, you need to connect to {{selectedConnector.label}} via OAuth.
+    If you don't have admin access to {{selectedConnector.label}}, ask your {{selectedConnector.label}} administrator to grant it to you.
+  </p>
 
-    <form name="pipeConnectionForm" class="form-horizontal" novalidate>
-      <div class="form-group">
-       	<label for="appId" class="control-label col-sm-3">Slack instance</label>
-       	<div class="col-sm-9">
-       		<input type="text" class="form-control" name="slack_instance" id="slack_instance" required ng-model="selectedPipe.slackInstance">
-       	</div>
-       	<label for="apiToken" class="control-label col-sm-3">API OAuthToken</label>
-       	<div class="col-sm-9">
-       		<input type="text" class="form-control" name="slack_api_token" id="apiToken" required ng-model="selectedPipe.slackToken">
-       	</div>
+    <h2 class="type_subhead">
+      <mark class="type_mark">Add your OAuth callback to {{selectedConnector.label}}</mark>
+    </h2>
+    <p class="type_copy">
+      Copy and paste this callback URL into your {{selectedConnector.label}} OAuth configuration settings.
+    </p>
+    <p class="type_copy form_container">
+      Callback URL: <strong>{{oauthCallback}}</strong>
+    </p>
+
+    <h2 class="type_subhead">
+      <mark class="type_mark">Add your consumer key and secret</mark>
+    </h2>
+    <p class="type_copy">
+      Copy your consumer key and secret from the Slack OAuth configuration screen and paste them here. Then click the <em>connect</em> button.
+    </p>
+
+    <div class="form_container">
+    <form name="pipeConnectionForm" class="form_standard" novalidate>
+      <div class="form_field" ng-class="{'has-error':!pipeConnectionForm.clientId.$pristine && pipeConnectionForm.clientId.$invalid}">
+        <label for="clientId" class="form_label">Consumer key</label>
+        <input type="text" class="input_text input_wide" name="clientId" id="clientId" required ng-model="selectedPipe.clientId" placeholder="{{selectedConnector.label}} consumer key {{!pipeConnectionForm.clientId.$pristine && pipeConnectionForm.clientId.$invalid ? 'is required' : ''}}">
+      </div>
+
+      <div class="form_field" ng-class="{'has-error':!pipeConnectionForm.clientSecret.$pristine && pipeConnectionForm.clientSecret.$invalid}">
+        <label for="clientSecret" class="form_label">Consumer secret</label>
+        <input type="text" class="input_text input_wide" name="clientSecret" id="clientSecret" required ng-model="selectedPipe.clientSecret" placeholder="{{selectedConnector.label}} consumer secret {{!pipeConnectionForm.clientSecret.$pristine && pipeConnectionForm.clientSecret.$invalid ? 'is required' : ''}}">
       </div>
       
-      <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#WaitSlackLoad" ng-click="savePipe({connect:true})" ng-disabled="pipeConnectionForm.$invalid">
-          	Connect to Slack Instance
-          </button>
-        </div>
+      <div class="button_group">
+        <button type="button" class="button_primary" ng-class="{'disabled':connectingpipe || pipeConnectionForm.$invalid}"
+            ng-click="connectingpipe = true;savePipe({connect:true})"
+            ng-disabled="connectingpipe || pipeConnectionForm.$invalid">{{ connectingpipe ? 'Connecting...' : 'Connect to '+selectedConnector.label }}</button>
+        <p class="type_copy" ng-if="connectingpipe">Redirecting to {{selectedConnector.label}}. Please wait...</p>
       </div>
     </form>
-  </section>
-</div>
+    </div>
 
-<div class="modal fade" id="WaitSlackLoad" tabindex="-1" role="dialog">
+</div>
+<!-- 
+<div class="modal fade" id="OAuthWaitLogin" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Slack connection</h4>
+        <h4 class="modal-title" id="myModalLabel">OAuth Validation</h4>
       </div>
       <div class="modal-body">
-        Connecting to your slack instance. Please wait...
+        Redirecting to {{selectedConnector.label}}.com. Please wait...
       </div>
     </div>
   </div>
 </div>
-
+ -->
 <page-button-bar nextPageTab="{{selectedPipe.hasOwnProperty('tables') ? 'tables' : ''}}" skipButtonDisabled="{{!selectedPipe.hasOwnProperty('tables')}}"/>
+</section>
