@@ -1,6 +1,26 @@
 # Simple Data Pipe connector for slack.com
 
-This connector uses [the Slack REST API](https://api.slack.com/) to fetch messages from one or more channels. The [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) is used to store the records in Cloudant. 
+This connector uses [the Slack REST API](https://api.slack.com/) to fetch messages from one or more channels. The [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) is used to store the data in Cloudant. One JSON record is created for each message in the selected channels(s):
+
+#####Message record structure
+```json
+{
+ "..." : "<cloudant document properties such as _id and _rev>",
+  "channel": {
+    "id": "<slack_channel_id>",
+    "name": "general-stuff"
+  },
+  "message": {
+    "type": "message",
+    "user": "<slack_user_id>",
+    "text": "Who turned off the light?",
+    "ts": "<timestamp>"
+  },
+ "pt_type": "<slack_channel_id>"		 		 
+}
+```
+
+> Note: System messages (e.g. @somebody joined #channel) are included in the data set by default.
 
 Need to load data from other sources? Check out the [connector repository](https://developer.ibm.com/clouddataservices/simple-data-pipe-connectors/).
 
@@ -25,7 +45,7 @@ This connector does not require any additional Bluemix service.
   When you [follow these steps to install this connector](https://github.com/ibm-cds-labs/simple-data-pipe/wiki/Installing-a-Simple-Data-Pipe-Connector), add the following line to the dependencies list in the `package.json` file: 
 
 ```
-"simple-data-pipe-connector-slack": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git"
+"simple-data-pipe-connector-slack": "git://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git",
 ```
 
 ##### Enable OAuth support and collect connectivity information
