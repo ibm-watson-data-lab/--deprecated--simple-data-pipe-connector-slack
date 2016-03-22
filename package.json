@@ -5,7 +5,7 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack"
+    "url": "git+https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git"
   },
   "simple_data_pipe": {
     "name": "Slack",
