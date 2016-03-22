@@ -1,11 +1,6 @@
-> Hey there! So you want to build your own Simple Data Pipe connector? [Start here](https://github.com/ibm-cds-labs/simple-data-pipe-connector-template/wiki/How-to-build-a-Simple-Data-Pipe-connector-using-this-template).
-
-***
-
-
 # Simple Data Pipe connector for slack.com
 
-This connector uses [the Slack REST API](https://api.slack.com/) to fetch all messages from one or more channels and the [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) to store them in Cloudant. 
+This connector uses [the Slack REST API](https://api.slack.com/) to fetch messages from one or more channels. The [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) is used to store the records in Cloudant. 
 
 Need to load data from other sources? Check out the [connector repository](https://developer.ibm.com/clouddataservices/simple-data-pipe-connectors/).
 
@@ -29,9 +24,8 @@ This connector does not require any additional Bluemix service.
 
   When you [follow these steps to install this connector](https://github.com/ibm-cds-labs/simple-data-pipe/wiki/Installing-a-Simple-Data-Pipe-Connector), add the following line to the dependencies list in the `package.json` file: 
 
-> BETA ONLY
 ```
-"simple-data-pipe-connector-slack": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git#pp_validation"
+"simple-data-pipe-connector-slack": "https://github.com/ibm-cds-labs/simple-data-pipe-connector-slack.git"
 ```
 
 ##### Enable OAuth support and collect connectivity information
@@ -46,7 +40,7 @@ To configure and run a pipe
 
 1. Open the Simple Data Pipe web console.
 2. Select __Create A New Pipe__.
-3. Select __Slack OAuth Data Source__ for the __Type__ when creating a new pipe.  
+3. Select __Slack Data Source__ for the __Type__ when creating a new pipe.  
 4. In the _Connect_ page, enter the _application id_ and _secret_ from the Slack application settings page.
 5. When prompted, select a Slack team you belong to and authorize the Simple Data Pipe application to access it in read-only mode. 
 6. Select a channel (or All channels) from which to load messages.
