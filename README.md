@@ -1,5 +1,7 @@
 # Simple Data Pipe connector for slack.com
 
+:no_entry_sign: This project is no longer maintained.
+
 This connector uses [the Slack REST API](https://api.slack.com/) to fetch messages from one or more channels. The [Simple Data Pipe SDK](https://github.com/ibm-cds-labs/simple-data-pipe-sdk) is used to store the data in Cloudant. One JSON record is created for each message in the selected channel(s):
 
 #####Message record structure
